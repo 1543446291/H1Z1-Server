@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers sources\LoginServer">
+      <UniqueIdentifier>{6141f5f8-b515-43bd-a3e3-293af7bff15a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\LoginServer\Header">
+      <UniqueIdentifier>{b8599df1-bcff-4639-8bb6-9ea11f4db65d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\LoginServer\Source">
+      <UniqueIdentifier>{99981df2-0545-42d6-98d7-abc3d4bed505}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Fichiers sources\LoginServer\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginServer.cpp">
+      <Filter>Fichiers sources\LoginServer\Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Settings.hpp">
+      <Filter>Fichiers sources\LoginServer\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginServer.hpp">
+      <Filter>Fichiers sources\LoginServer\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.hpp">
+      <Filter>Fichiers sources\LoginServer\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Misc.hpp">
+      <Filter>Fichiers sources\LoginServer\Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
