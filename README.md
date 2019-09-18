@@ -12,6 +12,6 @@ Copy the `Launcher.exe` file from the git repo and paste it into the game folder
 
 ## State
 
-- [x] Handle client connection request
+- [x] Handle client connection request (you'll still be on the loading screen but the `BaseApi` is setup & connected)
 - [ ] Handle steam connection request 
 - [ ] Send server data to the client
