@@ -1,3 +1,4 @@
+#include "DisconnectReasons.hpp"
 #include "LoginServer.hpp"
 #include "Misc.hpp"
 
