@@ -1,4 +1,5 @@
 #include "DisconnectReasons.hpp"
+#include "ClientState.hpp"
 #include "LoginServer.hpp"
 #include "H1Z1.hpp"
 

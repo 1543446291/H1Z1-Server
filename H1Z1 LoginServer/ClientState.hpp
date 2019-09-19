@@ -1,0 +1,41 @@
+
+/*
+	Description: ClientState from the game (2018 dump)
+*/
+
+enum ClientState
+{
+	cClientRunStateNone,
+	cClientRunStateAdminBackdoorLoginStart,
+	cClientRunStateAdminBackdoorLogin,
+	cClientRunStateAdminPreInitialize,
+	cClientRunStatePreInitialize,
+	cClientRunStateVerifyPsnLogin,
+	cClientRunStateCheckPsnChatRestrictions,
+	cClientRunStateWaitForPsnChatRestrictionsDialog,
+	cClientRunStateCheckPsnUgcRestrictions,
+	cClientRunStateWaitForPsnUgcRestrictionsDialog,
+	cClientRunStateWaitingForPsnLogin,
+	cClientRunStateStartingLogin,
+	cClientRunStateWaitForCharacterList,
+	cClientRunStateWaitForCharacterSelectLoad,
+	cClientRunStateCharacterCreateOrDelete,
+	cClientRunStateLoggingIn,
+	cClientRunStateNetInitialize,
+	cClientRunStateConnecting,
+	cClientRunStatePostInitialize,
+	cClientRunStateWaitForInitialDeployment,
+	cClientRunStatePostInitialDeployment,
+	cClientRunStateWaitForFirstZone,
+	cClientRunStateWaitForConfirmationPacket,
+	cClientRunStatePostWaitForFirstZone,
+	cClientRunStateWaitForContinue,
+	cClientRunStateRunning,
+	cClientRunStateWaitForTeleport,
+	cClientRunStateWaitForZoneLoad,
+	cClientRunStateWaitingForReloginSession,
+	cClientRunStateStartingRelogin,
+	cClientRunStateVerifyXBLiveLogin,
+	cClientRunStateShuttingDown,
+	UNKNOWN
+};

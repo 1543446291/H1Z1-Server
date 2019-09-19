@@ -22,6 +22,9 @@
     <Filter Include="Fichiers sources\LoginServer\Source">
       <UniqueIdentifier>{99981df2-0545-42d6-98d7-abc3d4bed505}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\LoginServer\Header\Game Related">
+      <UniqueIdentifier>{0c17eaca-5424-4a75-ba35-b2c0b0effe42}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -41,11 +44,14 @@
     <ClInclude Include="Header.hpp">
       <Filter>Fichiers sources\LoginServer\Header</Filter>
     </ClInclude>
-    <ClInclude Include="DisconnectReasons.hpp">
-      <Filter>Fichiers sources\LoginServer\Header</Filter>
-    </ClInclude>
     <ClInclude Include="H1Z1.hpp">
       <Filter>Fichiers sources\LoginServer\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="DisconnectReasons.hpp">
+      <Filter>Fichiers sources\LoginServer\Header\Game Related</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientState.hpp">
+      <Filter>Fichiers sources\LoginServer\Header\Game Related</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

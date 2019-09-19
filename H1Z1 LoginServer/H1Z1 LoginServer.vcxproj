@@ -127,6 +127,7 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClientState.hpp" />
     <ClInclude Include="DisconnectReasons.hpp" />
     <ClInclude Include="Header.hpp" />
     <ClInclude Include="LoginServer.hpp" />

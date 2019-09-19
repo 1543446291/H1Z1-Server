@@ -2,7 +2,6 @@
 #include <Windows.h>
 #include <iostream>
 
-
 class H1Z1 {
 public:
 
