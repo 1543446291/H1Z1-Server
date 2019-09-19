@@ -43,6 +43,7 @@ void c_h1z1_loginserver::OnMessage(SOCKET socket, struct sockaddr_in client_info
 		std::cout << "[Client] Connection request from " << inet_ntoa(client_information.sin_addr) << std::endl;
 		std::cout << "[Server] Sending a reply to " << inet_ntoa(client_information.sin_addr) << std::endl;
 
+		// Seems like the game generate a UUID or a key used to identify him on the server-side, here it is
 		LoginReply[2] = received_data[6];
 		LoginReply[3] = received_data[7];
 		LoginReply[4] = received_data[8];

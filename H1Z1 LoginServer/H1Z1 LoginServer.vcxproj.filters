@@ -53,6 +53,9 @@
     <ClInclude Include="ClientState.hpp">
       <Filter>Fichiers sources\LoginServer\Header\Game Related</Filter>
     </ClInclude>
+    <ClInclude Include="Network.hpp">
+      <Filter>Fichiers sources\LoginServer\Header\Game Related</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md">

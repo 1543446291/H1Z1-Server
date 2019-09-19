@@ -132,6 +132,7 @@
     <ClInclude Include="Header.hpp" />
     <ClInclude Include="LoginServer.hpp" />
     <ClInclude Include="H1Z1.hpp" />
+    <ClInclude Include="Network.hpp" />
     <ClInclude Include="Settings.hpp" />
   </ItemGroup>
   <ItemGroup>
