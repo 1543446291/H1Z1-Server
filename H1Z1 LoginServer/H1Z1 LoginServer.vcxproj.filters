@@ -41,7 +41,10 @@
     <ClInclude Include="Header.hpp">
       <Filter>Fichiers sources\LoginServer\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Misc.hpp">
+    <ClInclude Include="DisconnectReasons.hpp">
+      <Filter>Fichiers sources\LoginServer\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="H1Z1.hpp">
       <Filter>Fichiers sources\LoginServer\Header</Filter>
     </ClInclude>
   </ItemGroup>

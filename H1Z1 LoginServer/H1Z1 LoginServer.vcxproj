@@ -127,9 +127,10 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DisconnectReasons.hpp" />
     <ClInclude Include="Header.hpp" />
     <ClInclude Include="LoginServer.hpp" />
-    <ClInclude Include="Misc.hpp" />
+    <ClInclude Include="H1Z1.hpp" />
     <ClInclude Include="Settings.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
