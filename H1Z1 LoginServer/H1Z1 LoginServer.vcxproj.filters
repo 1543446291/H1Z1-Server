@@ -48,4 +48,9 @@
       <Filter>Fichiers sources\LoginServer\Header</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Filter>Fichiers sources\LoginServer</Filter>
+    </None>
+  </ItemGroup>
 </Project>

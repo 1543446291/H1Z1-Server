@@ -133,6 +133,9 @@
     <ClInclude Include="H1Z1.hpp" />
     <ClInclude Include="Settings.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
