@@ -8,7 +8,7 @@ const int g_port = 20042;
 
 int main()
 {
-
+	//LOG_SCOPE_F(INFO, "Hello world");
 	SetConsoleTitleA("H1Z1 LoginServer");
 
 	auto m_server = std::make_shared< c_udp_server >(g_ip, g_port);
@@ -16,10 +16,11 @@ int main()
 	if (!m_server->setup())
 	{
 		WSACleanup();
-		std::cout << "Can't setup the server!" << std::endl;
+		LOG_F(ERROR, "[Winsock] error");
 		system("pause");
 		return false;
 	}
+
 
 	while (true)
 		m_server->listen();

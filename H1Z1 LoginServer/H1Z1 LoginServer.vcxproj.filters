@@ -25,6 +25,12 @@
     <Filter Include="Fichiers sources\LoginServer\Header\Game Related">
       <UniqueIdentifier>{0c17eaca-5424-4a75-ba35-b2c0b0effe42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\LoginServer\Header\Packets">
+      <UniqueIdentifier>{464027f9-ad67-4324-849d-6543634bb645}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Loguru">
+      <UniqueIdentifier>{96138847-8f5d-4a82-982e-da658ba69915}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -35,6 +41,9 @@
     </ClCompile>
     <ClCompile Include="MoonAPI.cpp">
       <Filter>Fichiers sources\LoginServer\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="loguru.cpp">
+      <Filter>Fichiers sources\Loguru</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -59,9 +68,21 @@
     <ClInclude Include="Network.hpp">
       <Filter>Fichiers sources\LoginServer\Header\Game Related</Filter>
     </ClInclude>
+    <ClInclude Include="Pattern.hpp">
+      <Filter>Fichiers sources\LoginServer\Header\Packets</Filter>
+    </ClInclude>
+    <ClInclude Include="Reply.hpp">
+      <Filter>Fichiers sources\LoginServer\Header\Packets</Filter>
+    </ClInclude>
+    <ClInclude Include="loguru.hpp">
+      <Filter>Fichiers sources\Loguru</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md">
+      <Filter>Fichiers sources\LoginServer</Filter>
+    </None>
+    <None Include="TODO.md">
       <Filter>Fichiers sources\LoginServer</Filter>
     </None>
   </ItemGroup>

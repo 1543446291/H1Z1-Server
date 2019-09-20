@@ -11,4 +11,5 @@ public:
 	SOCKET _socket;
 	int _length;
 	struct sockaddr* _information;
+	unsigned char* _buffer;
 };

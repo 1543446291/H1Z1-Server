@@ -7,6 +7,7 @@
 #include <sys/types.h>
 #include <sstream>
 #include <iomanip>
+#include "loguru.hpp"
 #include "LoginServer.hpp"
 
 #pragma comment(lib, "ws2_32.lib")
@@ -32,13 +33,13 @@ public:
 		if (WSAStartup(MAKEWORD(2, 2), &wsa_data) != 0)
 			return false;
 
-		std::cout << "Windows connection established." << std::endl;
+		LOG_F(INFO, "Windows connection established.");
 
 		datagram_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 		if (datagram_socket == INVALID_SOCKET)
 			return false;
 
-		std::cout << "Socket created." << std::endl;
+		LOG_F(INFO, "Socket created.");
 
 		memset((void*)& socket_information, '\0', sizeof(struct sockaddr_in));
 
@@ -49,7 +50,7 @@ public:
 		if (bind(datagram_socket, (struct sockaddr*) & socket_information, sizeof(struct sockaddr_in)) == SOCKET_ERROR)
 			return false;
 
-		std::cout << "IP binded." << std::endl;
+		LOG_F(INFO, "IP binded.");
 
 		return true;
 	}
@@ -67,6 +68,7 @@ public:
 			m_h1z1->_socket = datagram_socket;
 			m_h1z1->_length = client_length;
 			m_h1z1->_information = (struct sockaddr*) & client_information;
+			m_h1z1->_buffer = (unsigned char*)buffer;
 
 			m_h1z1->OnMessage(datagram_socket, client_information, client_length, (unsigned char*)buffer, received_bytes);
 		}

@@ -1,7 +1,8 @@
 #pragma once
 #include <Windows.h>
 #include <iostream>
-#include <string_view>
+#include "Pattern.hpp"
+#include "Reply.hpp"
 #include <string_view>
 
 class H1Z1 {
@@ -13,11 +14,18 @@ public:
 		int16_t nId;
 	};
 
+	bool Init(SOCKET a, unsigned char* b)
+	{
+		this->_socket = a;
+		this->_buffer = b;
+
+		return true;
+	}
 	/*
 		Function:	 Hexdump
 		Description: Print the hex dump of a buffer.
 	*/
-	void Hexdump(void* ptr, int buflen)
+	void Hexdump(unsigned char* ptr, int buflen)
 	{
 		unsigned char* buf = (unsigned char*)ptr;
 		int i, j;
@@ -46,35 +54,29 @@ public:
 	}
 
 	/*
-		Function:	 GetDataBetween
-		Description: Create a new array with a specific start and end based on an existing array.
-	*/
-	unsigned char* GetDataBetween(unsigned char* original, int start_index, int num_of_bytes_to_copy)
-	{
-		unsigned char* data = 0;
-
-		memcpy(data, original + start_index, num_of_bytes_to_copy);
-		return data;
-	}
-
-	/*
 		Function:	 IsClientProtocolSupported
 		Description: Check the client UDP protocol version.
 	*/
-	bool IsClientProtocolSupported(unsigned char* data)
+
+	bool IsClientProtocolSupported()
 	{
+		_copybuffer = _buffer;
+
 		std::string serverProtocol(SupportedProtocol); // retrieve the server protocol version
-		memcpy(data, data + 14, 10);
-
-		std::string clientProtocol(reinterpret_cast<char*>(data));
-
+		memcpy(_copybuffer, _buffer + 14, 10); //TODO: make this cleaner (locate the complete protocol version string)
+		std::string clientProtocol(reinterpret_cast<char*>(_copybuffer)); // retrieve the client protocol version
 		std::size_t found = serverProtocol.find(clientProtocol);
-		if (serverProtocol.compare(clientProtocol) == 0)
+		if (serverProtocol.compare(clientProtocol) == 0) {
+			_copybuffer = NULL;
 			return true;
-		else
+		}
+		else {
 			return false;
+		}
 	}
 
 private:
-
+	unsigned char* _buffer;
+	unsigned char* _copybuffer;
+	SOCKET _socket;
 };
