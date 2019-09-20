@@ -8,6 +8,7 @@ const int g_port = 20042;
 
 int main()
 {
+
 	SetConsoleTitleA("H1Z1 LoginServer");
 
 	auto m_server = std::make_shared< c_udp_server >(g_ip, g_port);

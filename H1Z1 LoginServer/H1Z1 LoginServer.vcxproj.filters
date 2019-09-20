@@ -33,6 +33,9 @@
     <ClCompile Include="LoginServer.cpp">
       <Filter>Fichiers sources\LoginServer\Source</Filter>
     </ClCompile>
+    <ClCompile Include="MoonAPI.cpp">
+      <Filter>Fichiers sources\LoginServer\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Settings.hpp">

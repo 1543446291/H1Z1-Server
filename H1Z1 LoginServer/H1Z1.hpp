@@ -1,6 +1,8 @@
 #pragma once
 #include <Windows.h>
 #include <iostream>
+#include <string_view>
+#include <string_view>
 
 class H1Z1 {
 public:
@@ -56,20 +58,18 @@ public:
 	}
 
 	/*
-		Function:	 IsClientVersionSupported
-		Description: Check the client version.
+		Function:	 IsClientProtocolSupported
+		Description: Check the client UDP protocol version.
 	*/
-	bool IsClientVersionSupported(unsigned char* data)
+	bool IsClientProtocolSupported(unsigned char* data)
 	{
-		Hexdump(data, 200);
+		std::string serverProtocol(SupportedProtocol); // retrieve the server protocol version
+		memcpy(data, data + 14, 10);
 
-		std::string serverVersion(SupportedVersion);
-		std::string clientVersion(reinterpret_cast<char*>(data));
+		std::string clientProtocol(reinterpret_cast<char*>(data));
 
-		printf("%s - %s\n", serverVersion.c_str(), clientVersion.data());
-
-		std::size_t found = serverVersion.find(clientVersion);
-		if (found)
+		std::size_t found = serverProtocol.find(clientProtocol);
+		if (serverProtocol.compare(clientProtocol) == 0)
 			return true;
 		else
 			return false;
