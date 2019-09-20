@@ -17,3 +17,8 @@ You can also download the 2015 version of the game via steam if you bought H1Z1 
 - [x] Handle client connection request (you'll still be on the loading screen but the `BaseApi` is setup & connected)
 - [ ] Handle steam connection request 
 - [ ] Send server data to the client
+
+## Credit
+
+https://github.com/emilk/loguru - for the log utility
+https://github.com/ChriisH/cpp-httplib - for the http server used for the LoginServer API
