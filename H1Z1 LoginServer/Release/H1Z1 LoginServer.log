@@ -1,11 +1,1 @@
-﻿  LoginServer.cpp
-  string_view is only available with C++17 or later.
-  loguru.cpp
-  No signal handlers on Win32
-  Main.cpp
-  MoonAPI.cpp
-  Génération de code en cours
-  Previous IPDB not found, fall back to full compilation.
-  All 411 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Fin de la génération du code
-  H1Z1 LoginServer.vcxproj -> C:\Users\Shadow\Source\Repos\ChriisH\H1Z1-LoginServer\H1Z1 LoginServer\Release\H1Z1 LoginServer.exe
+﻿
