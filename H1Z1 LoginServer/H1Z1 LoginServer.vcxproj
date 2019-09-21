@@ -100,7 +100,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -124,15 +124,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="H1Z1.cpp" />
     <ClCompile Include="LoginServer.cpp" />
     <ClCompile Include="loguru.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MoonAPI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClientState.hpp" />
     <ClInclude Include="DisconnectReasons.hpp" />
     <ClInclude Include="Header.hpp" />
+    <ClInclude Include="jsonlib.hpp" />
     <ClInclude Include="LoginServer.hpp" />
     <ClInclude Include="H1Z1.hpp" />
     <ClInclude Include="loguru.hpp" />

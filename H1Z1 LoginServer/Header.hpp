@@ -91,3 +91,8 @@ private:
 	char buffer[max_buffer_length];
 
 };
+
+float SecToMin(float seconds)
+{
+	return seconds / 60;
+}

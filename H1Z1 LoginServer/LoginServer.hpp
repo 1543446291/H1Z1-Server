@@ -1,6 +1,4 @@
 #include <Windows.h>
-#include "Settings.hpp"
-
 class c_h1z1_loginserver
 {
 public:
