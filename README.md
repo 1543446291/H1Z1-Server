@@ -22,4 +22,4 @@ You can also download the 2015 version of the game via steam if you bought H1Z1 
 
 https://github.com/emilk/loguru - for the log utility
 https://github.com/ChriisH/cpp-httplib - for the http server
-https://github.com/dropbox/json11 - for the http server
+https://github.com/ChriisH/SimpleJSON - for the json utility
