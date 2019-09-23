@@ -1,0 +1,69 @@
+{
+  "servers": [
+    {
+      "Id": 0,
+      "State": 0,
+      "Name": "Abomination",
+      "NameId": 0,
+      "Description": "Abomination Test Server",
+      "DescriptionId": 0,
+      "RequiredFeatureId": 0,
+      "ApplicationData": "<ServerInfo Region=\"CharacterCreate.RegionUs\" Subregion=\"UI.SubregionUS\" IsRecommended=\"1\" IsRecommendedVS=\"0\" IsRecommendedNC=\"0\" IsRecommendedTR=\"0\" />",
+      "PopulationLevel": 1,
+      "PopulationOobData": "<Population ServerCapacity=\"0\" PingAddress=\"127.0.0.1:10010\" Rulesets=\"\"><factionlist IsList=\"1\"><faction Id=\"1\" Percent=\"0\" TargetPopPct=\"0\" RewardBuff=\"52\" XPBuff=\"52\" PercentAvg=\"0\"/><faction Id=\"2\" Percent=\"0\" TargetPopPct=\"1\" RewardBuff=\"0\" XPBuff=\"0\" PercentAvg=\"0\"/><faction Id=\"3\" Percent=\"0\" TargetPopPct=\"1\" RewardBuff=\"0\" XPBuff=\"0\" PercentAvg=\"1\"/></factionlist></Population>",
+      "AccessExpression": true
+    },
+    {
+      "Id": 1,
+      "State": 0,
+      "Name": "Abraxas",
+      "NameId": 1,
+      "Description": "Abraxas",
+      "DescriptionId": 1,
+      "RequiredFeatureId": 0,
+      "ApplicationData": "<ServerInfo Region=\"CharacterCreate.RegionUs\" Subregion=\"UI.SubregionUS\" IsRecommended=\"0\" IsRecommendedVS=\"0\" IsRecommendedNC=\"0\" IsRecommendedTR=\"0\" />",
+      "PopulationLevel": 1,
+      "PopulationOobData": "<Population ServerCapacity=\"0\" PingAddress=\"127.0.0.1:10011\" Rulesets=\"Permadeath,Headshots,FirstPersonOnly\"><factionlist IsList=\"1\"><faction Id=\"1\" Percent=\"0\" TargetPopPct=\"0\" RewardBuff=\"52\" XPBuff=\"52\" PercentAvg=\"0\"/><faction Id=\"2\" Percent=\"0\" TargetPopPct=\"1\" RewardBuff=\"0\" XPBuff=\"0\" PercentAvg=\"0\"/><faction Id=\"3\" Percent=\"0\" TargetPopPct=\"1\" RewardBuff=\"0\" XPBuff=\"0\" PercentAvg=\"1\"/></factionlist></Population>",
+      "AccessExpression": true
+    },
+    {
+      "Id": 2,
+      "State": 0,
+      "Name": "Affliction",
+      "NameId": 2,
+      "Description": "Affliction",
+      "DescriptionId": 2,
+      "RequiredFeatureId": 0,
+      "ApplicationData": "<ServerInfo Region=\"CharacterCreate.RegionUs\" Subregion=\"UI.SubregionUS\" IsRecommended=\"0\" IsRecommendedVS=\"0\" IsRecommendedNC=\"0\" IsRecommendedTR=\"0\" />",
+      "PopulationLevel": 1,
+      "PopulationOobData": "<Population ServerCapacity=\"0\" PingAddress=\"127.0.0.1:10012\" Rulesets=\"PvE,Permadeath,Headshots,FirstPersonOnly\"><factionlist IsList=\"1\"><faction Id=\"1\" Percent=\"0\" TargetPopPct=\"0\" RewardBuff=\"52\" XPBuff=\"52\" PercentAvg=\"0\"/><faction Id=\"2\" Percent=\"0\" TargetPopPct=\"1\" RewardBuff=\"0\" XPBuff=\"0\" PercentAvg=\"0\"/><faction Id=\"3\" Percent=\"0\" TargetPopPct=\"1\" RewardBuff=\"0\" XPBuff=\"0\" PercentAvg=\"1\"/></factionlist></Population>",
+      "AccessExpression": true
+    },
+    {
+      "Id": 3,
+      "State": 0,
+      "Name": "Aftermath",
+      "NameId": 3,
+      "Description": "Aftermath",
+      "DescriptionId": 3,
+      "RequiredFeatureId": 0,
+      "ApplicationData": "<ServerInfo Region=\"CharacterCreate.RegionUs\" Subregion=\"UI.SubregionUS\" IsRecommended=\"0\" IsRecommendedVS=\"0\" IsRecommendedNC=\"0\" IsRecommendedTR=\"0\" />",
+      "PopulationLevel": 1,
+      "PopulationOobData": "<Population ServerCapacity=\"0\" PingAddress=\"127.0.0.1:10013\" Rulesets=\"\"><factionlist IsList=\"1\"><faction Id=\"1\" Percent=\"0\" TargetPopPct=\"0\" RewardBuff=\"52\" XPBuff=\"52\" PercentAvg=\"0\"/><faction Id=\"2\" Percent=\"0\" TargetPopPct=\"1\" RewardBuff=\"0\" XPBuff=\"0\" PercentAvg=\"0\"/><faction Id=\"3\" Percent=\"0\" TargetPopPct=\"1\" RewardBuff=\"0\" XPBuff=\"0\" PercentAvg=\"1\"/></factionlist></Population>",
+      "AccessExpression": true
+    },
+    {
+      "Id": 4,
+      "State": 0,
+      "Name": "ZEvent",
+      "NameId": 4,
+      "Description": "ZEvent",
+      "DescriptionId": 4,
+      "RequiredFeatureId": 0,
+      "ApplicationData": "<ServerInfo Region=\"CharacterCreate.RegionUs\" Subregion=\"UI.SubregionUS\" IsRecommended=\"1\" IsRecommendedVS=\"0\" IsRecommendedNC=\"0\" IsRecommendedTR=\"0\" />",
+      "PopulationLevel": 1,
+      "PopulationOobData": "<Population ServerCapacity=\"0\" PingAddress=\"127.0.0.1:10014\" Rulesets=\"\"><factionlist IsList=\"1\"><faction Id=\"1\" Percent=\"0\" TargetPopPct=\"0\" RewardBuff=\"52\" XPBuff=\"52\" PercentAvg=\"0\"/><faction Id=\"2\" Percent=\"0\" TargetPopPct=\"1\" RewardBuff=\"0\" XPBuff=\"0\" PercentAvg=\"0\"/><faction Id=\"3\" Percent=\"0\" TargetPopPct=\"1\" RewardBuff=\"0\" XPBuff=\"0\" PercentAvg=\"1\"/></factionlist></Population>",
+      "AccessExpression": true
+    }
+  ]
+}

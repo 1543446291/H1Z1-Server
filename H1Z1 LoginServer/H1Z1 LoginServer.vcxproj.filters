@@ -31,8 +31,11 @@
     <Filter Include="Fichiers sources\Loguru">
       <UniqueIdentifier>{96138847-8f5d-4a82-982e-da658ba69915}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers sources\jsonlib">
-      <UniqueIdentifier>{8b371fd1-62f2-42ce-ab87-586d30acf471}</UniqueIdentifier>
+    <Filter Include="Fichiers sources\LoginServer\Header\Game Related\Player">
+      <UniqueIdentifier>{28fdd55f-c669-4c0c-9256-734e81115a65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\rapidjson">
+      <UniqueIdentifier>{9482663c-464b-4411-a1f0-f62a061e310a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -47,6 +50,9 @@
     </ClCompile>
     <ClCompile Include="H1Z1.cpp">
       <Filter>Fichiers sources\LoginServer\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Fichiers sources\LoginServer\Header\Game Related\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,8 +86,17 @@
     <ClInclude Include="loguru.hpp">
       <Filter>Fichiers sources\Loguru</Filter>
     </ClInclude>
-    <ClInclude Include="jsonlib.hpp">
-      <Filter>Fichiers sources\jsonlib</Filter>
+    <ClInclude Include="Player.hpp">
+      <Filter>Fichiers sources\LoginServer\Header\Game Related\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidjson\document.h">
+      <Filter>Fichiers sources\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidjson\stringbuffer.h">
+      <Filter>Fichiers sources\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidjson\writer.h">
+      <Filter>Fichiers sources\rapidjson</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
