@@ -67,9 +67,12 @@ public:
 	struct sockaddr_in _socketinformation;
 
 	void Init();
+	void HandleFragmentedReliableData(CLIENT _sender, unsigned char* _packet, size_t _size);
 	void HandleDisconnect(CLIENT _sender, unsigned char* _packet, size_t _size);
 	void HandleSessionRequest(CLIENT _sender, unsigned char* _packet, size_t _size);
 	void HandlePacket(CLIENT _sender, unsigned char* _packet, size_t _size);
+
+
 	int SendPacket(unsigned char* b, int size);
 
 	static H1Z1* GetInstance();

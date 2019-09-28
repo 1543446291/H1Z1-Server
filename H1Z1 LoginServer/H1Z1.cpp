@@ -20,7 +20,7 @@ void H1Z1::Init()
 {
 	this->m_sProtocol.assign("LoginUdp_9");
 	this->m_sServerAddress.assign("127.0.0.1");
-	this->m_dServerPort = 20040;
+	this->m_dServerPort = 20042;
 	this->m_dGatewayPort = 20043;
 	this->m_dZonePort = 1000;
 	this->m_dUdpLength = 512;
@@ -145,7 +145,9 @@ void H1Z1::HandlePacket(H1Z1::CLIENT _sender, unsigned char* _packet, size_t _si
 
 		break;
 	case OPCodes::FRAGMENTED_RELIABLE_DATA:
-		//TODO: Handle it :Kappa: next step
+		//TODO: Handle it, this is the next step
+		HandleFragmentedReliableData(_sender, _packet, _size);
+
 		break;
 	case OPCodes::ACK_RELIABLE_DATA:
 		//sender.DataChannel.Receive(packet);
@@ -162,6 +164,12 @@ int16_t H1Z1::GetOpCode(unsigned char* _packet)
 	Stream packet(_packet, sizeof _packet);
 	
 	return packet.ReadInt16();
+}
+
+void H1Z1::HandleFragmentedReliableData(CLIENT _sender, unsigned char* _packet, size_t _size)
+{
+	Utils::Hexdump(_packet, _size);
+	throw std::logic_error("The method or operation is not implemented.");
 }
 
 H1Z1* H1Z1::GetInstance()
