@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers sources\Header">
+      <UniqueIdentifier>{d8accecf-2190-4986-8af5-c124ec382570}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Source">
+      <UniqueIdentifier>{70338e2d-a323-464c-92fd-234cc5750467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Header\Utils">
+      <UniqueIdentifier>{05ee2c90-3b8e-4045-ab76-588fe40cd36c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Source\Utils">
+      <UniqueIdentifier>{e77564c4-5be9-4612-b284-a19979683116}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Test">
+      <UniqueIdentifier>{2a836868-c006-489f-b987-577ff21f71de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Aw">
+      <UniqueIdentifier>{2e420ab3-85dc-45cc-a248-28e7b06379f1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="H1Z1.hpp">
+      <Filter>Fichiers sources\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.hpp">
+      <Filter>Fichiers sources\Header\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.hpp">
+      <Filter>Fichiers sources\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBuffer.h">
+      <Filter>Fichiers sources\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="Exception.h">
+      <Filter>Fichiers sources\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="Primitives.h">
+      <Filter>Fichiers sources\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtils.h">
+      <Filter>Fichiers sources\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="TempStuff.hpp">
+      <Filter>Fichiers sources\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="UdpServer.hpp">
+      <Filter>Fichiers sources\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream.h">
+      <Filter>Fichiers sources\Aw</Filter>
+    </ClInclude>
+    <ClInclude Include="typeDefs.h">
+      <Filter>Fichiers sources\Aw</Filter>
+    </ClInclude>
+    <ClInclude Include="Test.h">
+      <Filter>Fichiers sources\Aw</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="H1Z1.cpp">
+      <Filter>Fichiers sources\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Fichiers sources\Source\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBuffer.cpp">
+      <Filter>Fichiers sources\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="StringUtils.cpp">
+      <Filter>Fichiers sources\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="H1Z1CLIENT.cpp">
+      <Filter>Fichiers sources\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream.cpp">
+      <Filter>Fichiers sources\Aw</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

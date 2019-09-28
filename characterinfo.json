@@ -1,0 +1,22 @@
+{ 
+   "Status":1,
+   "CanBypassServerLock": true,
+   "Entities":[ 
+      { 
+         "Payload":{ 
+            "Guid":1,
+            "Name":"Player1",
+            "Empireid":1,
+            "Empireiconid":0,
+            "Battlerank":0,
+            "Nextbattlerank":0,
+            "Serverid":0,
+            "Servername":"LocalHost",
+            "Headid":0,
+            "Modelid":0,
+            "Gender":0,
+            "Profileid":0
+         }
+      }
+   ]
+}
