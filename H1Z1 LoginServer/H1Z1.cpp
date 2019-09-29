@@ -4,8 +4,6 @@
 #include "Stream.h"
 #include "UdpServer.hpp"
 
-#define LOG
-
 H1Z1* H1Z1::m_pInstance;
 
 H1Z1::H1Z1()
@@ -16,6 +14,9 @@ H1Z1::~H1Z1()
 {
 }
 
+/*
+	The init function setup the LoginServer/GatewayServer/ZoneServer infos
+*/
 void H1Z1::Init()
 {
 	this->m_sProtocol.assign("LoginUdp_9");
@@ -31,7 +32,7 @@ int H1Z1::SendPacket(unsigned char* b, int size)
 	return sendto(this->_socket, (const char*)b, size, 0, (const struct sockaddr*) & this->_socketinformation, this->_socketsize);
 }
 
-void H1Z1::HandleDisconnect(H1Z1::CLIENT _sender, unsigned char* _packet, size_t _size)
+void H1Z1::HandleDisconnect(unsigned char* _packet, size_t _size)
 {
 	Stream Disconnect(_packet, _size);
 
@@ -40,18 +41,18 @@ void H1Z1::HandleDisconnect(H1Z1::CLIENT _sender, unsigned char* _packet, size_t
 	auto sessionID = Disconnect.ReadUInt32();
 	auto disconnectReason = Disconnect.ReadUInt16();
 
-	if (sessionID == _sender.GetSessionID())
+	if (sessionID == this->clientList[sessionID]->GetSessionID())
 	{
-		//TODO: - Server.RemoveClient(sender);
-	}
+		delete this->clientList[sessionID];
+		clientList.erase(sessionID);
 
-	printf("%s", Utils::GetDisconnectReason(disconnectReason)); //TODO: handle the different disconnect reason, maybe store the disconnection type into a database
+		printf("[Info] {%X} disconnected, reason: %s\n", sessionID, Utils::GetDisconnectReason(disconnectReason)); //TODO: handle the different disconnect reason, maybe store the disconnection type into a database
+	}
 }
 
-void H1Z1::HandleSessionRequest(H1Z1::CLIENT _sender, unsigned char* _packet, size_t _size)
+void H1Z1::HandleSessionRequest(unsigned char* _packet, size_t _size)
 {
 	//TODO: use a struct like packet system(auto packet = new (struct SessionRequest)_packet;)
-
 	Stream SessionReq(_packet, _size);
 
 	auto packetID	= SessionReq.ReadInt16();
@@ -61,22 +62,22 @@ void H1Z1::HandleSessionRequest(H1Z1::CLIENT _sender, unsigned char* _packet, si
 	auto udpLength	= SessionReq.ReadUInt16();
 	auto protocol	= SessionReq.ReadASCIIString();
 
+	printf("[Info] SessionRequest from {%X}\n", sessionID);
+
 #ifdef LOG
 	//printf("[%d] sessionID {%X} crcLenght {%d} udpLength {%d} protocol {%s}\n", packetID, sessionID, crcLength, udpLength, protocol.c_str());
 #endif
 
 	if (!this->m_sProtocol.compare(protocol))
 	{
+		clientList[sessionID] = new H1Z1::CLIENT(); //Create a new user and use his sessionID as an Id
+
 		bool _encryptable = false;
 		bool _compressable = true;
 
-		_sender.StartSession(crcLength, sessionID, udpLength);
-		_sender.SetCompressable(_compressable);
-		_sender.SetEncryptable(_encryptable);
-
-		/*TODO:
-		Server.AddNewClient(sender);
-		*/
+		clientList[sessionID]->StartSession(crcLength, sessionID, udpLength);
+		clientList[sessionID]->SetCompressable(_compressable);
+		clientList[sessionID]->SetEncryptable(_encryptable);
 
 		Stream packet;
 
@@ -91,9 +92,8 @@ void H1Z1::HandleSessionRequest(H1Z1::CLIENT _sender, unsigned char* _packet, si
 		packet.WriteInt32(0);
 		packet.WriteUInt8(3);
 
-		H1Z1::SendPacket(packet._raw, packet._size);
-		printf("Packet sent\n");
-		//TODO: Server.SendPacket(_sender, packet);
+		if(H1Z1::SendPacket(packet._raw, packet._size))
+			printf("[Info] SessionReply sent to {%X}\n", sessionID);
 	}
 	else
 	{
@@ -105,48 +105,59 @@ void H1Z1::HandleSessionRequest(H1Z1::CLIENT _sender, unsigned char* _packet, si
 		packet.WriteUInt8(0);
 		packet.WriteUInt32(sessionID);
 		packet.WriteUInt16(Utils::DisconnectReasonProtocolMismatch);
-		packet.WriteUInt16(/*XorCRCTruncated*/0);
+		packet.WriteUInt16(/*XorCRCTruncated*/0); //Useless 
+
+		if (H1Z1::SendPacket(packet._raw, packet._size))
+			printf("[Warning] disconnected {%X} reason: DisconnectReasonProtocolMismatch\n", sessionID);
+
+		closesocket(this->_socket);
+
+
+		//auto it = this->clientList.find(sessionID);
+		//if (it != this->clientList.end())
+
+		delete this->clientList[sessionID];
+		clientList.erase(sessionID);
 
 
 		//TODO: - Server.RemoveClient(sender);
-		//		- Send the data
 	}
 
 }
 
-void H1Z1::HandlePacket(H1Z1::CLIENT _sender, unsigned char* _packet, size_t _size)
+void H1Z1::HandlePacket(unsigned char* _packet, size_t _size)
 {
-	int16_t opCode = GetOpCode(_packet); //We retrieve the opcode
-	printf("%X\n", opCode);
-	if (!_sender.HasSession()) //verify if the user has a session
-	{
-		if (opCode != OPCodes::SESSION_REQUEST)
-		{
-			// TODO: Handle this to avoid DoS attacks
-			return;
-		}
-	}
+	int16_t opCode = GetOpCode(_packet);
+	//if (!_sender.HasSession())
+	//{
+	//	if (opCode != OPCodes::SESSION_REQUEST)
+	//	{
+	//		// TODO: Handle this to avoid DoS attacks
+	//		return;
+	//	}
+	//}
 
+	//TODO: Verify packet size before trying to handle it
 	switch (opCode)
 	{
 	case OPCodes::SESSION_REQUEST:
-		HandleSessionRequest(_sender, _packet, _size);
+		HandleSessionRequest(_packet, _size);
 		break;
 	case OPCodes::MULTI:
 
 		break;
 	case OPCodes::DISCONNECT:
-		HandleDisconnect(_sender, _packet, _size);
+		HandleDisconnect(_packet, _size);
 		break;
 	case OPCodes::PING:
-
+		//TODO: PONG
 		break;
 	case OPCodes::RELIABLE_DATA:
 
 		break;
 	case OPCodes::FRAGMENTED_RELIABLE_DATA:
 		//TODO: Handle it, this is the next step
-		HandleFragmentedReliableData(_sender, _packet, _size);
+		HandleFragmentedReliableData(_packet, _size);
 
 		break;
 	case OPCodes::ACK_RELIABLE_DATA:
@@ -154,7 +165,7 @@ void H1Z1::HandlePacket(H1Z1::CLIENT _sender, unsigned char* _packet, size_t _si
 		break;
 
 	default:
-		printf("Received Unknown packet %d!\n", opCode);
+		printf("[Warning] Received Unknown packet %d!\n", opCode);
 		break;
 	}
 }
@@ -166,10 +177,10 @@ int16_t H1Z1::GetOpCode(unsigned char* _packet)
 	return packet.ReadInt16();
 }
 
-void H1Z1::HandleFragmentedReliableData(CLIENT _sender, unsigned char* _packet, size_t _size)
+void H1Z1::HandleFragmentedReliableData(unsigned char* _packet, size_t _size)
 {
-	Utils::Hexdump(_packet, _size);
-	throw std::logic_error("The method or operation is not implemented.");
+	//Utils::Hexdump(_packet, _size);
+	//TODO: Handle the packet, find how it is constructed (maybe encrypted)
 }
 
 H1Z1* H1Z1::GetInstance()

@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <chrono>
+#include <map>
 
 enum OPCodes
 {
@@ -52,25 +53,29 @@ private:
 	~H1Z1();
 
 	static H1Z1* m_pInstance;
+
 public:
 
-	class CLIENT;
 	std::string m_sProtocol;
 	uint16_t m_dUdpLength;
 	std::string m_sServerAddress;
 	int32_t m_dServerPort;
 	int32_t m_dGatewayPort;
 	int32_t m_dZonePort;
+	int32_t m_dClientNum;
+
+	class CLIENT;
+	std::map<int, CLIENT*> clientList;
 
 	SOCKET _socket;
 	int _socketsize;
 	struct sockaddr_in _socketinformation;
 
 	void Init();
-	void HandleFragmentedReliableData(CLIENT _sender, unsigned char* _packet, size_t _size);
-	void HandleDisconnect(CLIENT _sender, unsigned char* _packet, size_t _size);
-	void HandleSessionRequest(CLIENT _sender, unsigned char* _packet, size_t _size);
-	void HandlePacket(CLIENT _sender, unsigned char* _packet, size_t _size);
+	void HandleFragmentedReliableData(unsigned char* _packet, size_t _size);
+	void HandleDisconnect(unsigned char* _packet, size_t _size);
+	void HandleSessionRequest(unsigned char* _packet, size_t _size);
+	void HandlePacket(unsigned char* _packet, size_t _size);
 
 
 	int SendPacket(unsigned char* b, int size);
@@ -84,7 +89,7 @@ class H1Z1::CLIENT
 {
 private:
 	bool SessionStarted;
-	uint16_t SessionID;
+	unsigned long SessionID;
 	uint16_t CRCLength;
 	uint16_t BufferSize;
 	uint16_t CRCSeed;
@@ -97,13 +102,13 @@ private:
 	bool Encrypted;
 public:
 
-	void StartSession(uint16_t _crcLength, uint16_t _sessionId, uint16_t _udpBufferSize);
+	void StartSession(uint16_t _crcLength, unsigned long _sessionId, uint16_t _udpBufferSize);
 
 	bool HasSession();
 
 	uint16_t GetCRCLength();
 
-	uint16_t GetSessionID();
+	unsigned long GetSessionID();
 
 	uint16_t GetBufferSize();
 

@@ -10,7 +10,7 @@ uint16_t H1Z1::CLIENT::GetCRCLength()
 	return this->CRCLength;
 }
 
-uint16_t H1Z1::CLIENT::GetSessionID()
+unsigned long H1Z1::CLIENT::GetSessionID()
 {
 	return this->SessionID;
 }
@@ -64,8 +64,9 @@ void H1Z1::CLIENT::Interact()
 	LastInteraction = 0;
 }
 
-void H1Z1::CLIENT::StartSession(uint16_t _crcLength, uint16_t _sessionId, uint16_t _udpBufferSize)
+void H1Z1::CLIENT::StartSession(uint16_t _crcLength, unsigned long _sessionId, uint16_t _udpBufferSize)
 {
+	printf("[Info] session started for {%X}\n", _sessionId);
 	// Generate a CRC Seed for this session
 	this->CRCSeed = std::rand();
 

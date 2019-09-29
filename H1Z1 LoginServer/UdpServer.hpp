@@ -47,6 +47,8 @@ public:
 
 	void listen()
 	{
+		//printf("Clients: %d\n", H1Z1::GetInstance()->clientList.size());
+
 		memset(buffer, '\0', sizeof(buffer));
 
 		static int client_length = sizeof(struct sockaddr_in);
@@ -55,12 +57,11 @@ public:
 
 		if (received_bytes > 0)
 		{	
-			H1Z1::CLIENT PlayerOne;
 			H1Z1::GetInstance()->_socket = datagram_socket;
 			H1Z1::GetInstance()->_socketsize = client_length;
 			H1Z1::GetInstance()->_socketinformation = client_information;
 
-			H1Z1::GetInstance()->HandlePacket(PlayerOne, (unsigned char*)buffer, received_bytes);
+			H1Z1::GetInstance()->HandlePacket((unsigned char*)buffer, received_bytes);
 		}
 	}
 
