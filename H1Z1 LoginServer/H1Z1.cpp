@@ -22,6 +22,7 @@ void H1Z1::Init()
 	this->m_sProtocol.assign("LoginUdp_9");
 	this->m_sServerAddress.assign("127.0.0.1");
 	this->m_dServerPort = 20042;
+	this->m_dHTTPPort = 80;
 	this->m_dGatewayPort = 20043;
 	this->m_dZonePort = 1000;
 	this->m_dUdpLength = 512;
@@ -33,6 +34,11 @@ int H1Z1::SendPacket(unsigned char* b, int size)
 }
 
 void H1Z1::HandleMultiPacket(unsigned char* _packet, size_t _size)
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
+void H1Z1::HandleData(unsigned char* _packet, size_t _size)
 {
 	throw std::logic_error("The method or operation is not implemented.");
 }
@@ -127,6 +133,12 @@ void H1Z1::HandleSessionRequest(unsigned char* _packet, size_t _size)
 	}
 }
 
+void H1Z1::HandleDataFragment(unsigned char* _packet, size_t _size)
+{
+
+	//throw std::logic_error("The method or operation is not implemented.");
+}
+
 void H1Z1::HandlePacket(unsigned char* _packet, size_t _size)
 {
 	int16_t opCode = GetOpCode(_packet);
@@ -157,18 +169,17 @@ void H1Z1::HandlePacket(unsigned char* _packet, size_t _size)
 		printf("[Info] server received a ping\n");
 		break;
 	case OPCodes::Data:
-
+		HandleData(_packet, _size);
 		break;
-	case OPCodes::DataFragment: //0x0D
+	case OPCodes::DataFragment:
 		//TODO: Handle it, this is the next step
-		HandleServerListRequest(_packet, _size);
+		HandleDataFragment(_packet, _size);
 		break;
 	case OPCodes::Ack:
-		//sender.DataChannel.Receive(packet);
+
 		break;
 	case OPCodes::NetStatusRequest:
-		//sender.DataChannel.Receive(packet);
-		printf("[Info] server received a netstatus request\n");
+		printf("[Info] server received a net status request\n");
 		break;
 
 	default:
@@ -182,11 +193,6 @@ int16_t H1Z1::GetOpCode(unsigned char* _packet)
 	Stream packet(_packet, sizeof _packet);
 	
 	return packet.ReadInt16();
-}
-
-void H1Z1::HandleServerListRequest(unsigned char* _packet, size_t _size)
-{
-
 }
 
 H1Z1* H1Z1::GetInstance()

@@ -55,13 +55,13 @@ private:
 
 	static H1Z1* m_pInstance;
 
-	void HandleMultiPacket(unsigned char* _packet, size_t _size);
 public:
 
 	std::string m_sProtocol;
 	uint16_t m_dUdpLength;
 	std::string m_sServerAddress;
 	int32_t m_dServerPort;
+	int32_t m_dHTTPPort;
 	int32_t m_dGatewayPort;
 	int32_t m_dZonePort;
 	int32_t m_dClientNum;
@@ -74,18 +74,18 @@ public:
 	struct sockaddr_in _socketinformation;
 
 	void Init();
-	void HandleServerListRequest(unsigned char* _packet, size_t _size);
+	void HandleMultiPacket(unsigned char* _packet, size_t _size);
+	void HandleData(unsigned char* _packet, size_t _size);
+	void HandleDataFragment(unsigned char* _packet, size_t _size);
 	void HandleDisconnect(unsigned char* _packet, size_t _size);
 	void KickSession(unsigned long _sessionId);
 	void HandleSessionRequest(unsigned char* _packet, size_t _size);
 	void HandlePacket(unsigned char* _packet, size_t _size);
-
-
 	int SendPacket(unsigned char* b, int size);
+	int16_t GetOpCode(unsigned char*);
 
 	static H1Z1* GetInstance();
 
-	int16_t GetOpCode(unsigned char*);
 };
 
 class H1Z1::CLIENT

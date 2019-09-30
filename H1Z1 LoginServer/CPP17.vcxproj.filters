@@ -31,6 +31,12 @@
     <Filter Include="Fichiers sources\Aw">
       <UniqueIdentifier>{2e420ab3-85dc-45cc-a248-28e7b06379f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\Header\Logoru">
+      <UniqueIdentifier>{2ab8af69-7ae1-4995-8a77-7747f4847282}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Source\Logoru">
+      <UniqueIdentifier>{844d82c2-1478-4d45-ad7c-e8eda12c342e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="H1Z1.hpp">
@@ -69,6 +75,12 @@
     <ClInclude Include="Test.h">
       <Filter>Fichiers sources\Aw</Filter>
     </ClInclude>
+    <ClInclude Include="logoru.hpp">
+      <Filter>Fichiers sources\Header\Logoru</Filter>
+    </ClInclude>
+    <ClInclude Include="httplib.hpp">
+      <Filter>Fichiers sources\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="H1Z1.cpp">
@@ -91,6 +103,9 @@
     </ClCompile>
     <ClCompile Include="Stream.cpp">
       <Filter>Fichiers sources\Aw</Filter>
+    </ClCompile>
+    <ClCompile Include="logoru.cpp">
+      <Filter>Fichiers sources\Source\Logoru</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

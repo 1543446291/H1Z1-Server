@@ -70,7 +70,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\Users\Shadow\Desktop\H1Z1 Server\H1Z1 LoginServer\rapidjson;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -88,6 +90,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,6 +131,8 @@
     <ClInclude Include="Exception.h" />
     <ClInclude Include="H1Z1.hpp" />
     <ClInclude Include="Header.hpp" />
+    <ClInclude Include="httplib.hpp" />
+    <ClInclude Include="logoru.hpp" />
     <ClInclude Include="Stream.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="typeDefs.h" />
@@ -141,6 +146,7 @@
     <ClCompile Include="DataBuffer.cpp" />
     <ClCompile Include="H1Z1.cpp" />
     <ClCompile Include="H1Z1CLIENT.cpp" />
+    <ClCompile Include="logoru.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Stream.cpp" />
     <ClCompile Include="StringUtils.cpp" />
