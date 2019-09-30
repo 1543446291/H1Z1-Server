@@ -24,4 +24,4 @@ You can also download the 2015 version of the game via steam if you bought H1Z1 
 
 [cpp-httplib](https://github.com/ChriisH/cpp-httplib) - for the http server
 
-[SimpleJSON](https://github.com/ChriisH/SimpleJSON) - for the json utility
+[rapidjson](https://github.com/) - for the json utility
