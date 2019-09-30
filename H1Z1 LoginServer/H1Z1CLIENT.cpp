@@ -1,13 +1,9 @@
 #include "H1Z1.hpp"
+#include "Stream.h"
 
 bool H1Z1::CLIENT::HasSession()
 {
 	return this->SessionStarted;
-}
-
-uint16_t H1Z1::CLIENT::GetCRCLength() 
-{
-	return this->CRCLength;
 }
 
 unsigned long H1Z1::CLIENT::GetSessionID()
@@ -60,20 +56,19 @@ int H1Z1::CLIENT::GetLastInteraction()
 
 void H1Z1::CLIENT::Interact()
 {
-	// Set our last interaction so we don't get destroyed
-	LastInteraction = 0;
+	LastInteraction = std::time(nullptr);;
 }
 
-void H1Z1::CLIENT::StartSession(uint16_t _crcLength, unsigned long _sessionId, uint16_t _udpBufferSize)
+void H1Z1::CLIENT::StartSession(unsigned long _sessionId, uint16_t _udpBufferSize)
 {
 	printf("[Info] session started for {%X}\n", _sessionId);
 	// Generate a CRC Seed for this session
 	this->CRCSeed = std::rand();
 
 	// Session variables
-	this->CRCLength = _crcLength;
 	this->SessionID = _sessionId;
 	this->BufferSize = _udpBufferSize;
+	this->LastInteraction = std::time(nullptr); //unix timestamp
 	this->SessionStarted = true;
 
 	Compressable = true;

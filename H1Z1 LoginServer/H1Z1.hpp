@@ -4,26 +4,27 @@
 #include <iostream>
 #include <chrono>
 #include <map>
+#include <ctime	>
 
 enum OPCodes
 {
-	SESSION_REQUEST = 0x01,
-	SESSION_RESPONSE = 0x02,
-	MULTI = 0x03,
-	DISCONNECT = 0x05,
-	PING = 0x06,
-	NET_STATUS_REQUEST = 0x07,
-	NET_STATUS_RESPONSE = 0x08,
-	RELIABLE_DATA = 0x09,
-	FRAGMENTED_RELIABLE_DATA = 0x0D,
-	OUT_OF_ORDER_RELIABLE_DATA = 0x11,
-	ACK_RELIABLE_DATA = 0x15,
-	MULTI_MESSAGE = 0x19,
-	FATAL_ERROR = 0x1D,
-	FATAL_ERROR_RESPONSE = 0x1E
+	SessionRequest = 0x01,
+	SessionReply = 0x02,
+	MultiPacket = 0x03,
+	Disconnect = 0x05,
+	Ping = 0x06,
+	NetStatusRequest = 0x07,
+	NetStatusReply = 0x08,
+	Data = 0x09,
+	DataFragment = 0x0D,
+	OutOfOrder = 0x11,
+	Ack = 0x15,
+	MultiMessage = 0x19,
+	FatalError = 0x1D,
+	FatalErrorReply = 0x1E
 };
 
-enum PacketName
+enum LoginServer_PacketName
 {
 	LoginRequest,
 	LoginReply,
@@ -54,6 +55,7 @@ private:
 
 	static H1Z1* m_pInstance;
 
+	void HandleMultiPacket(unsigned char* _packet, size_t _size);
 public:
 
 	std::string m_sProtocol;
@@ -72,8 +74,9 @@ public:
 	struct sockaddr_in _socketinformation;
 
 	void Init();
-	void HandleFragmentedReliableData(unsigned char* _packet, size_t _size);
+	void HandleServerListRequest(unsigned char* _packet, size_t _size);
 	void HandleDisconnect(unsigned char* _packet, size_t _size);
+	void KickSession(unsigned long _sessionId);
 	void HandleSessionRequest(unsigned char* _packet, size_t _size);
 	void HandlePacket(unsigned char* _packet, size_t _size);
 
@@ -90,7 +93,6 @@ class H1Z1::CLIENT
 private:
 	bool SessionStarted;
 	unsigned long SessionID;
-	uint16_t CRCLength;
 	uint16_t BufferSize;
 	uint16_t CRCSeed;
 	bool Encryptable;
@@ -102,7 +104,7 @@ private:
 	bool Encrypted;
 public:
 
-	void StartSession(uint16_t _crcLength, unsigned long _sessionId, uint16_t _udpBufferSize);
+	void StartSession(unsigned long _sessionId, uint16_t _udpBufferSize);
 
 	bool HasSession();
 
@@ -123,8 +125,6 @@ public:
 	bool IsCompressable();
 
 	void SetCompressable(bool _compressable);
-
-	void Disconnect(int16_t _reason, bool _client = false);
 
 	int GetLastInteraction();
 

@@ -32,6 +32,11 @@ int H1Z1::SendPacket(unsigned char* b, int size)
 	return sendto(this->_socket, (const char*)b, size, 0, (const struct sockaddr*) & this->_socketinformation, this->_socketsize);
 }
 
+void H1Z1::HandleMultiPacket(unsigned char* _packet, size_t _size)
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
 void H1Z1::HandleDisconnect(unsigned char* _packet, size_t _size)
 {
 	Stream Disconnect(_packet, _size);
@@ -50,16 +55,30 @@ void H1Z1::HandleDisconnect(unsigned char* _packet, size_t _size)
 	}
 }
 
+void H1Z1::KickSession(unsigned long _sessionId)
+{
+	//Basically, we send a broken packet the game can't handle to crash the game.
+	Stream KickPacket;
+	KickPacket.WriteInt16(OPCodes::SessionReply);
+	KickPacket.WriteUInt32(_sessionId);
+	KickPacket.WriteUInt32(99);
+	KickPacket.WriteUInt32(0);
+	KickPacket.WriteUInt8(512);
+	KickPacket.WriteUInt16(2);
+	KickPacket.WriteUInt32(3);
+
+	H1Z1::SendPacket(KickPacket._raw, KickPacket._size);
+}
+
 void H1Z1::HandleSessionRequest(unsigned char* _packet, size_t _size)
 {
-	//TODO: use a struct like packet system(auto packet = new (struct SessionRequest)_packet;)
+	//TODO: use a struct like packet system(auto packet = new (struct LoginRequest)_packet;)
 	Stream SessionReq(_packet, _size);
 
 	auto packetID	= SessionReq.ReadInt16();
 	auto unknown	= SessionReq.ReadInt32();
 	auto sessionID	= SessionReq.ReadUInt32();
-	auto crcLength	= SessionReq.ReadUInt16();
-	auto udpLength	= SessionReq.ReadUInt16();
+	auto udpLength	= SessionReq.ReadUInt32();
 	auto protocol	= SessionReq.ReadASCIIString();
 
 	printf("[Info] SessionRequest from {%X}\n", sessionID);
@@ -71,26 +90,26 @@ void H1Z1::HandleSessionRequest(unsigned char* _packet, size_t _size)
 	if (!this->m_sProtocol.compare(protocol))
 	{
 		clientList[sessionID] = new H1Z1::CLIENT(); //Create a new user and use his sessionID as an Id
-
+		//TODO: Update the HTTP API to show the number of connected clients
 		bool _encryptable = false;
 		bool _compressable = true;
 
-		clientList[sessionID]->StartSession(crcLength, sessionID, udpLength);
+		clientList[sessionID]->StartSession(sessionID, udpLength);
 		clientList[sessionID]->SetCompressable(_compressable);
 		clientList[sessionID]->SetEncryptable(_encryptable);
 
 		Stream packet;
 
-		packet.WriteInt16(OPCodes::SESSION_RESPONSE);
+		packet.WriteInt16(OPCodes::SessionReply);
 		packet.WriteUInt32(sessionID);
-		packet.WriteUInt8(99);
-		packet.WriteUInt8(99);
-		packet.WriteUInt8(99);
-		packet.WriteUInt8(99);
-		packet.WriteUInt16(513);
-		packet.WriteInt32(2);
-		packet.WriteInt32(0);
-		packet.WriteUInt8(3);
+		packet.WriteUInt32(0); //CRCSeed
+		packet.WriteUInt8(2);
+		packet.WriteUInt8(1);
+		packet.WriteUInt32(2);
+		packet.WriteUInt8(0);
+		packet.WriteUInt32(3);
+
+		Utils::Hexdump(packet._raw, packet._size);
 
 		if(H1Z1::SendPacket(packet._raw, packet._size))
 			printf("[Info] SessionReply sent to {%X}\n", sessionID);
@@ -99,30 +118,13 @@ void H1Z1::HandleSessionRequest(unsigned char* _packet, size_t _size)
 	{
 		printf("[Warning] a client tried to connect with a wrong protocol (server: %s client: %s)\n", this->m_sProtocol.c_str(), protocol.c_str());
 
-		Stream packet;
+		H1Z1::KickSession(sessionID);
 
-		packet.WriteInt16(OPCodes::DISCONNECT);
-		packet.WriteUInt8(0);
-		packet.WriteUInt32(sessionID);
-		packet.WriteUInt16(Utils::DisconnectReasonProtocolMismatch);
-		packet.WriteUInt16(/*XorCRCTruncated*/0); //Useless 
-
-		if (H1Z1::SendPacket(packet._raw, packet._size))
-			printf("[Warning] disconnected {%X} reason: DisconnectReasonProtocolMismatch\n", sessionID);
-
-		closesocket(this->_socket);
-
-
-		//auto it = this->clientList.find(sessionID);
-		//if (it != this->clientList.end())
+		printf("[Info] kicked {%X} reason: DisconnectReasonProtocolMismatch\n", sessionID);
 
 		delete this->clientList[sessionID];
 		clientList.erase(sessionID);
-
-
-		//TODO: - Server.RemoveClient(sender);
 	}
-
 }
 
 void H1Z1::HandlePacket(unsigned char* _packet, size_t _size)
@@ -132,7 +134,7 @@ void H1Z1::HandlePacket(unsigned char* _packet, size_t _size)
 	//{
 	//	if (opCode != OPCodes::SESSION_REQUEST)
 	//	{
-	//		// TODO: Handle this to avoid DoS attacks
+	//		// TODO: Handle this to avoid DoS attacks on the head server
 	//		return;
 	//	}
 	//}
@@ -140,28 +142,33 @@ void H1Z1::HandlePacket(unsigned char* _packet, size_t _size)
 	//TODO: Verify packet size before trying to handle it
 	switch (opCode)
 	{
-	case OPCodes::SESSION_REQUEST:
+	case OPCodes::SessionRequest:
 		HandleSessionRequest(_packet, _size);
 		break;
-	case OPCodes::MULTI:
+	case OPCodes::MultiPacket:
+		HandleMultiPacket(_packet, _size);
+		break;
+	case OPCodes::Disconnect:
+		if (_size == 11) //Make sure the packet size is equal to the one we're handling
+			HandleDisconnect(_packet, _size);
+		break;
+	case OPCodes::Ping:
+		//TODO: send a PONG reply
+		printf("[Info] server received a ping\n");
+		break;
+	case OPCodes::Data:
 
 		break;
-	case OPCodes::DISCONNECT:
-		HandleDisconnect(_packet, _size);
-		break;
-	case OPCodes::PING:
-		//TODO: PONG
-		break;
-	case OPCodes::RELIABLE_DATA:
-
-		break;
-	case OPCodes::FRAGMENTED_RELIABLE_DATA:
+	case OPCodes::DataFragment: //0x0D
 		//TODO: Handle it, this is the next step
-		HandleFragmentedReliableData(_packet, _size);
-
+		HandleServerListRequest(_packet, _size);
 		break;
-	case OPCodes::ACK_RELIABLE_DATA:
+	case OPCodes::Ack:
 		//sender.DataChannel.Receive(packet);
+		break;
+	case OPCodes::NetStatusRequest:
+		//sender.DataChannel.Receive(packet);
+		printf("[Info] server received a netstatus request\n");
 		break;
 
 	default:
@@ -177,10 +184,9 @@ int16_t H1Z1::GetOpCode(unsigned char* _packet)
 	return packet.ReadInt16();
 }
 
-void H1Z1::HandleFragmentedReliableData(unsigned char* _packet, size_t _size)
+void H1Z1::HandleServerListRequest(unsigned char* _packet, size_t _size)
 {
-	//Utils::Hexdump(_packet, _size);
-	//TODO: Handle the packet, find how it is constructed (maybe encrypted)
+
 }
 
 H1Z1* H1Z1::GetInstance()
