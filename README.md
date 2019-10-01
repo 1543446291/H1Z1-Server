@@ -2,7 +2,7 @@
 
 ## What is this project?
 
-This project aim to make a server emulator for the 2015/2016 version of H1Z1.
+This project aim to make a server for the 2015/2016 version of H1Z1.
 
 **How to use?**
 
