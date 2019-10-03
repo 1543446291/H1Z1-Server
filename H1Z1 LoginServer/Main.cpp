@@ -13,8 +13,30 @@
 std::clock_t start;
 DWORD WINAPI m_httpserver(LPVOID arg);
 
+void ApplicationClosing()
+{
+	std::map<int, H1Z1::CLIENT*>::iterator it = H1Z1::GetInstance()->clientList.begin();
+
+	while (it != H1Z1::GetInstance()->clientList.end())
+	{
+		auto sessionID = it->first;
+
+		H1Z1::CLIENT* count = it->second;
+
+		H1Z1::GetInstance()->KickSession(sessionID);
+
+		// Increment the Iterator to point to next entry
+		it++;
+	}
+
+	Sleep(4000);
+	return;
+}
+
 int main()
 {
+	std::atexit(ApplicationClosing);
+
 	start = std::clock();
 
 	H1Z1::GetInstance()->Init();

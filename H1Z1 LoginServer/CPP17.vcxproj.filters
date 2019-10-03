@@ -25,9 +25,6 @@
     <Filter Include="Fichiers sources\Source\Utils">
       <UniqueIdentifier>{e77564c4-5be9-4612-b284-a19979683116}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers sources\Test">
-      <UniqueIdentifier>{2a836868-c006-489f-b987-577ff21f71de}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers sources\Aw">
       <UniqueIdentifier>{2e420ab3-85dc-45cc-a248-28e7b06379f1}</UniqueIdentifier>
     </Filter>
@@ -47,18 +44,6 @@
     </ClInclude>
     <ClInclude Include="Header.hpp">
       <Filter>Fichiers sources\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="DataBuffer.h">
-      <Filter>Fichiers sources\Test</Filter>
-    </ClInclude>
-    <ClInclude Include="Exception.h">
-      <Filter>Fichiers sources\Test</Filter>
-    </ClInclude>
-    <ClInclude Include="Primitives.h">
-      <Filter>Fichiers sources\Test</Filter>
-    </ClInclude>
-    <ClInclude Include="StringUtils.h">
-      <Filter>Fichiers sources\Test</Filter>
     </ClInclude>
     <ClInclude Include="TempStuff.hpp">
       <Filter>Fichiers sources\Header</Filter>
@@ -88,12 +73,6 @@
     </ClCompile>
     <ClCompile Include="Utils.cpp">
       <Filter>Fichiers sources\Source\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="DataBuffer.cpp">
-      <Filter>Fichiers sources\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="StringUtils.cpp">
-      <Filter>Fichiers sources\Test</Filter>
     </ClCompile>
     <ClCompile Include="H1Z1CLIENT.cpp">
       <Filter>Fichiers sources\Source</Filter>

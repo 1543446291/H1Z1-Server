@@ -127,8 +127,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="DataBuffer.h" />
-    <ClInclude Include="Exception.h" />
     <ClInclude Include="H1Z1.hpp" />
     <ClInclude Include="Header.hpp" />
     <ClInclude Include="httplib.hpp" />
@@ -137,19 +135,15 @@
     <ClInclude Include="Test.h" />
     <ClInclude Include="typeDefs.h" />
     <ClInclude Include="UdpServer.hpp" />
-    <ClInclude Include="Primitives.h" />
-    <ClInclude Include="StringUtils.h" />
     <ClInclude Include="TempStuff.hpp" />
     <ClInclude Include="Utils.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DataBuffer.cpp" />
     <ClCompile Include="H1Z1.cpp" />
     <ClCompile Include="H1Z1CLIENT.cpp" />
     <ClCompile Include="logoru.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Stream.cpp" />
-    <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

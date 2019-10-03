@@ -1,1 +1,4 @@
-﻿
+﻿  Main.cpp
+C:\Users\Shadow\Desktop\H1Z1 Server\H1Z1 LoginServer\Main.cpp(79): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Shadow\Desktop\H1Z1 Server\H1Z1 LoginServer\Main.cpp(80): warning C4267: 'argument' : conversion de 'size_t' en 'int', perte possible de données
+  CPP17.vcxproj -> C:\Users\Shadow\Desktop\H1Z1 Server\H1Z1 LoginServer\x64\Debug\H1Z1 Server.exe

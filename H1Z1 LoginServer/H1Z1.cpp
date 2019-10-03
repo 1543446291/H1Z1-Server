@@ -135,8 +135,27 @@ void H1Z1::HandleSessionRequest(unsigned char* _packet, size_t _size)
 
 void H1Z1::HandleDataFragment(unsigned char* _packet, size_t _size)
 {
+// 	var data = new Buffer(4 + ((compression && !isSubPacket) ? 1 : 0) + packet.data.length),
+// 		offset = 0;
+// 	data.writeUInt16BE(0x0D, offset);
+// 	offset += 2;
+// 	if (compression) {
+// 		data.writeUInt8(0, offset);
+// 		offset += 1;
+// 	}
+// 	data.writeUInt16BE(packet.sequence, offset);
+// 	offset += 2;
+// 	packet.data.copy(data, offset);
+// 	if (!isSubPacket) {
+// 		data = appendCRC(data, crcSeed);
+// 	}
 
-	//throw std::logic_error("The method or operation is not implemented.");
+	Stream data(_packet, _size);
+
+	auto packetID = data.ReadInt16();
+	auto sequence = data.ReadUInt16();
+	auto fragmentEnd = data._raw - 0;
+
 }
 
 void H1Z1::HandlePacket(unsigned char* _packet, size_t _size)

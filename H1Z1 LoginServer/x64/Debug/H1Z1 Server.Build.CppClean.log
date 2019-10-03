@@ -4,12 +4,12 @@ c:\users\shadow\desktop\h1z1 server\h1z1 loginserver\x64\debug\utils.obj
 c:\users\shadow\desktop\h1z1 server\h1z1 loginserver\x64\debug\stringutils.obj
 c:\users\shadow\desktop\h1z1 server\h1z1 loginserver\x64\debug\stream.obj
 c:\users\shadow\desktop\h1z1 server\h1z1 loginserver\x64\debug\main.obj
-c:\users\shadow\desktop\h1z1 server\h1z1 loginserver\x64\debug\h1z1client.obj
-c:\users\shadow\desktop\h1z1 server\h1z1 loginserver\x64\debug\databuffer.obj
-c:\users\shadow\desktop\h1z1 server\h1z1 loginserver\x64\debug\h1z1.obj
 c:\users\shadow\desktop\h1z1 server\h1z1 loginserver\x64\debug\logoru.obj
-c:\users\shadow\desktop\h1z1 server\h1z1 loginserver\x64\debug\h1z1 server.exe
+c:\users\shadow\desktop\h1z1 server\h1z1 loginserver\x64\debug\h1z1client.obj
+c:\users\shadow\desktop\h1z1 server\h1z1 loginserver\x64\debug\h1z1.obj
+c:\users\shadow\desktop\h1z1 server\h1z1 loginserver\x64\debug\databuffer.obj
 c:\users\shadow\desktop\h1z1 server\h1z1 loginserver\x64\debug\h1z1 server.ilk
+c:\users\shadow\desktop\h1z1 server\h1z1 loginserver\x64\debug\h1z1 server.exe
 c:\users\shadow\desktop\h1z1 server\h1z1 loginserver\x64\debug\h1z1 server.pdb
 c:\users\shadow\desktop\h1z1 server\h1z1 loginserver\x64\debug\h1z1 server.tlog\cl.command.1.tlog
 c:\users\shadow\desktop\h1z1 server\h1z1 loginserver\x64\debug\h1z1 server.tlog\cl.read.1.tlog
