@@ -10,7 +10,7 @@ Just compile the project via Visual Studio and start the server, by default it s
 Open your game folder then edit the `ClientConfig.ini` file at the second line and set the LoginServer IP & Port.
 Copy the `Launcher.exe` file from the git repo and paste it into the game folder, you will have to use this launcher to start the game.
 
-You can also download the 2015 version of the game via steam if you bought H1Z1 by typing `download_depot 295110 295111 8460827590815522615` in the steam console.
+You can also download the 2015 version of the game via steam if you bought H1Z1 by typing `download_depot 295110 295111 8395659676467739522` in the steam console.
 
 ## State
 
