@@ -19,7 +19,7 @@ H1Z1::~H1Z1()
 */
 void H1Z1::Init()
 {
-	this->m_sProtocol.assign("LoginUdp_9");
+	this->m_sProtocol.assign("LoginUdp_11");
 	this->m_sServerAddress.assign("127.0.0.1");
 	this->m_dServerPort = 20042;
 	this->m_dHTTPPort = 80;
