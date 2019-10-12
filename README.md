@@ -1,4 +1,4 @@
-# H1Z1-LoginServer
+# H1Z1-Server
 
 ## What is this project?
 
