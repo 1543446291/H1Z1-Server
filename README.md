@@ -18,6 +18,10 @@ You can also download the 2016 version of the game via steam if you bought H1Z1 
 - [ ] Gateway server
 - [ ] Zone server
 
+## Info for devs
+
+The login server handle the client session request and reply to it, then it sends the gateway server ip/port. The gateway server sends the zone servers list that are shown in the lobby and finally, when the client connect to a server from the list it connects to the zone server and perform request about the map/player packets...
+
 ## Credits
 
 [loguru](https://github.com/emilk/loguru) - for the log utility
