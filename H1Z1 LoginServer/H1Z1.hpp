@@ -59,9 +59,11 @@ public:
 
 	std::string m_sProtocol;
 	uint16_t m_dUdpLength;
-	std::string m_sServerAddress;
-	int32_t m_dServerPort;
+	std::string m_sLoginServerAddress;
+	std::string m_sGatewayServerAddress;
+	std::string m_sZoneServerAddress;
 	int32_t m_dHTTPPort;
+	int32_t m_dLoginServerPort;
 	int32_t m_dGatewayPort;
 	int32_t m_dZonePort;
 	int32_t m_dClientNum;

@@ -61,7 +61,7 @@ void H1Z1::CLIENT::Interact()
 
 void H1Z1::CLIENT::StartSession(unsigned long _sessionId, uint16_t _udpBufferSize)
 {
-	printf("[Info] session started for {%X}\n", _sessionId);
+	printf("[LoginServer::Info] session started for {%X}\n", _sessionId);
 	// Generate a CRC Seed for this session
 	this->CRCSeed = std::rand();
 

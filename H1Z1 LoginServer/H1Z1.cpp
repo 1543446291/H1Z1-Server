@@ -14,21 +14,20 @@ H1Z1::~H1Z1()
 {
 }
 
-/*
-	The init function setup the LoginServer/GatewayServer/ZoneServer infos
-*/
 void H1Z1::Init()
 {
-	this->m_sProtocol.assign("LoginUdp_9");
-	this->m_sServerAddress.assign("127.0.0.1");
-	this->m_dServerPort = 20042;
-	this->m_dHTTPPort = 80;
-	this->m_dGatewayPort = 20043;
+	this->m_sProtocol.assign("LoginUdp_11");
+	this->m_sLoginServerAddress.assign("127.0.0.1"); // Need to be the local ip of the computer
+	this->m_sGatewayServerAddress.assign("127.0.0.1"); // The Gateway's IP can be the same as the Login's IP but it's not really recommended
+	this->m_sZoneServerAddress.assign("127.0.0.1"); // TODO: Host multiples zone servers (5 max atm) and send the IP/Port to the HTTP API,
+													 // the Gateway will reply to the game ServerListReq with all the zone servers infos
+	this->m_dLoginServerPort = 20042;
+	this->m_dGatewayPort = 20001;
 	this->m_dZonePort = 1000;
-	this->m_dUdpLength = 512;
+	this->m_dUdpLength = 512; // TODO: Remove this later, pretty useless
 }
 
-int H1Z1::SendPacket(unsigned char* b, int size)
+int H1Z1::SendPacket(/*H1Z1::CLIENT client, */unsigned char* b, int size)
 {	
 	return sendto(this->_socket, (const char*)b, size, 0, (const struct sockaddr*) & this->_socketinformation, this->_socketsize);
 }
@@ -57,7 +56,7 @@ void H1Z1::HandleDisconnect(unsigned char* _packet, size_t _size)
 		delete this->clientList[sessionID];
 		clientList.erase(sessionID);
 
-		printf("[Info] {%X} disconnected, reason: %s\n", sessionID, Utils::GetDisconnectReason(disconnectReason)); //TODO: handle the different disconnect reason, maybe store the disconnection type into a database
+		printf("[LoginServer::Info] {%X} disconnected, reason: %s\n", sessionID, Utils::GetDisconnectReason(disconnectReason)); //TODO: handle the different disconnect reason, maybe store the disconnection type into a database
 	}
 }
 
@@ -87,7 +86,7 @@ void H1Z1::HandleSessionRequest(unsigned char* _packet, size_t _size)
 	auto udpLength	= SessionReq.ReadUInt32();
 	auto protocol	= SessionReq.ReadASCIIString();
 
-	printf("[Info] SessionRequest from {%X}\n", sessionID);
+	printf("[LoginServer::Info] SessionRequest from {%X}\n", sessionID);
 
 #ifdef LOG
 	//printf("[%d] sessionID {%X} crcLenght {%d} udpLength {%d} protocol {%s}\n", packetID, sessionID, crcLength, udpLength, protocol.c_str());
@@ -115,18 +114,18 @@ void H1Z1::HandleSessionRequest(unsigned char* _packet, size_t _size)
 		packet.WriteUInt8(0);
 		packet.WriteUInt32(3);
 
-		Utils::Hexdump(packet._raw, packet._size);
+		//Utils::Hexdump(packet._raw, packet._size);
 
 		if(H1Z1::SendPacket(packet._raw, packet._size))
-			printf("[Info] SessionReply sent to {%X}\n", sessionID);
+			printf("[LoginServer::Info] SessionReply sent to {%X}\n", sessionID);
 	}
 	else
 	{
-		printf("[Warning] a client tried to connect with a wrong protocol (server: %s client: %s)\n", this->m_sProtocol.c_str(), protocol.c_str());
+		printf("[LoginServer::Warning] a client tried to connect with a wrong protocol (server: %s client: %s)\n", this->m_sProtocol.c_str(), protocol.c_str());
 
 		H1Z1::KickSession(sessionID);
 
-		printf("[Info] kicked {%X} reason: DisconnectReasonProtocolMismatch\n", sessionID);
+		printf("[LoginServer::Info] kicked {%X} reason: DisconnectReasonProtocolMismatch\n", sessionID);
 
 		delete this->clientList[sessionID];
 		clientList.erase(sessionID);

@@ -1,4 +1,4 @@
-#define WIN32_LEAN_AND_MEAN 
+﻿#define WIN32_LEAN_AND_MEAN 
 #include "httplib.hpp"
 
 #include <Windows.h>
@@ -35,29 +35,58 @@ void ApplicationClosing()
 
 int main()
 {
-	std::atexit(ApplicationClosing);
-
 	start = std::clock();
 
 	H1Z1::GetInstance()->Init();
 
-	auto m_server = std::make_shared< c_udp_server >(H1Z1::GetInstance()->m_sServerAddress, H1Z1::GetInstance()->m_dServerPort);
+	auto m_LoginServer = std::make_shared< c_udp_server >(H1Z1::GetInstance()->m_sLoginServerAddress, H1Z1::GetInstance()->m_dLoginServerPort);
+	auto m_GatewayServer = std::make_shared< c_udp_server >(H1Z1::GetInstance()->m_sGatewayServerAddress, H1Z1::GetInstance()->m_dGatewayPort);
+	//auto m_ZoneServer = std::make_shared< c_udp_server >(H1Z1::GetInstance()->m_sServerAddress, H1Z1::GetInstance()->m_dZonePort);
 	auto m_HTTPServer = CreateThread(NULL, 0, m_httpserver, 0, 0, 0);
 
-	switch (m_server->setup())
+	switch (m_LoginServer->setup())
 	{
 	case 0:
-		printf("[Error] INVALID_SOCKET\n");
+		printf("[LoginServer] INVALID_SOCKET\n");
 		break;
 	case 1:
-		printf("[Error] SOCKET_ERROR\n");
+		printf("[LoginServer] SOCKET_ERROR\n");
 		break;
 	default:
-		printf("[Info] Server set up\n");
+		printf("[LoginServer] Server set up on port %d\n", H1Z1::GetInstance()->m_dLoginServerPort);
 	}
 
-	while (true)
-		m_server->listen();
+	switch (m_GatewayServer->setup())
+	{
+	case 0:
+		printf("[GatewayServer] INVALID_SOCKET\n");
+		break;
+	case 1:
+		printf("[GatewayServer] SOCKET_ERROR\n");
+		break;
+	default:
+		printf("[GatewayServer] Server set up on port %d\n", H1Z1::GetInstance()->m_dGatewayPort);
+	}
+
+// 	switch (m_ZoneServer->setup())
+// 	{
+// 	case 0:
+// 		printf("[ZoneServer] INVALID_SOCKET\n");
+// 		break;
+// 	case 1:
+// 		printf("[ZoneServer] SOCKET_ERROR\n");
+// 		break;
+// 	default:
+// 		printf("[ZoneServer] Server set up\n");
+// 	}
+
+	printf("\n\n");
+
+	while (true) {
+		m_LoginServer->listen();
+		m_GatewayServer->listen();
+// 		m_ZoneServer->listen();
+	}
 }
 
 DWORD WINAPI m_httpserver(LPVOID arg)
@@ -65,7 +94,7 @@ DWORD WINAPI m_httpserver(LPVOID arg)
 	httplib::Server svr;
 
 	svr.Get("/", [](const httplib::Request & req, httplib::Response & res) {
-		const char json[] = "{\"Uptime\":0,\"Clients\":0,\"Zoneservers\":0,\"Maintenance\":{\"Mode\":false,\"Reason\":\"Server is being updated.\"}}";
+		const char json[] = "{\"Uptime\":0,\"Clients\":0,\"Zones\":0,\"Maintenance\":{\"Mode\":false,\"Reason\":\"Server is being updated.\"}}";
 
 		rapidjson::Document document;
 
@@ -89,6 +118,6 @@ DWORD WINAPI m_httpserver(LPVOID arg)
 	});
 
 
-	svr.listen(H1Z1::GetInstance()->m_sServerAddress.c_str(), H1Z1::GetInstance()->m_dHTTPPort);
+	svr.listen(H1Z1::GetInstance()->m_sLoginServerAddress.c_str(), H1Z1::GetInstance()->m_dHTTPPort);
 	return 0;
 }
